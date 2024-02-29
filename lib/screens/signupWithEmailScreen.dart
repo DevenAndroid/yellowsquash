@@ -1,26 +1,44 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:yellowsquash/screens/SignupScreen.dart';
-import 'package:yellowsquash/screens/signupWithEmailScreen.dart';
-import 'package:yellowsquash/widgets/apptheme.dart';
-import 'package:yellowsquash/widgets/common_text_field.dart';
+import 'package:yellowsquash/screens/otpScreen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+import '../widgets/apptheme.dart';
+import '../widgets/common_text_field.dart';
+
+class SignUpWithEmailScreen extends StatefulWidget {
+  const SignUpWithEmailScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpWithEmailScreen> createState() => _SignUpWithEmailScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpWithEmailScreenState extends State<SignUpWithEmailScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size.height;
+
     return Scaffold(
+      appBar: AppBar(
+        leading: Padding(
+          padding: EdgeInsets.only(left: 20, top: 20),
+          child: CircleAvatar(
+            backgroundColor: Color(0xffF3F3F3),
+            minRadius: 30,
+            maxRadius: 30,
+            child: GestureDetector(
+              onTap: (){
+                Get.back();
+              },
+              child: Icon(
+                Icons.arrow_back,
+                size: 20,
+              ),
+            ),
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -29,54 +47,33 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: size * .20,
+                height: size * .15,
               ),
               Text(
-                'Hey.',
+                'Welcome,',
                 style: GoogleFonts.oswald(color: Colors.black, fontSize: 27, fontWeight: FontWeight.w400),
               ),
               Text(
-                'Login Now,',
+                'Let’s Get Started!',
                 style: GoogleFonts.oswald(color: Colors.black, fontSize: 27, fontWeight: FontWeight.w500),
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
               const RegisterTextFieldWidget(
-                hint: 'Email id',
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              RegisterTextFieldWidget(
-                hint: 'Password',
-                obscureText: true,
-                suffixIcon: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.remove_red_eye),
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  'Forgot Password?',
-                  style: GoogleFonts.poppins(color: AppTheme.greenColor, fontSize: 12, fontWeight: FontWeight.w500),
-                ),
+                hint: 'Enter Email id',
               ),
               const SizedBox(
                 height: 20,
               ),
               CommonButtonBlue(
-                  title: 'Login',
-                onPressed: (){
-                    Get.to(const SignUpScreen());
+                title: 'Proceed',
+                onPressed: () {
+                  Get.to(const OtpScreen());
                 },
               ),
               SizedBox(
-                height: size * .10,
+                height: size * .18,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     width: 10,
                   ),
-                  const Text('Or Login with',
+                  const Text('OR REGISTER WITH',
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -128,27 +125,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 40,
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: RichText(
-                  text: TextSpan(
-                    text: 'New Here? ',
-                    style: TextStyle(color: Color(0xff595959)),
-                    children: <TextSpan>[
-                      TextSpan(
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                             Get.to(const SignUpScreen());
-                            },
-                          text: ' Sign Up',
-                          style: TextStyle(fontWeight: FontWeight.w500, color: AppTheme.greenColor, fontSize: 14)),
-                    ],
-                  ),
-                ),
-              )
             ],
           ),
         ),
