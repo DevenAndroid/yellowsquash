@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:yellowsquash/screens/workshopsDetailsScreen.dart';
 import 'package:yellowsquash/widgets/apptheme.dart';
 import 'package:yellowsquash/widgets/common_text_field.dart';
 
@@ -15,6 +17,8 @@ class WorkShopsScreen extends StatefulWidget {
 class _WorkShopsScreenState extends State<WorkShopsScreen> {
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
+    var width = MediaQuery.sizeOf(context).width;
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -89,96 +93,106 @@ class _WorkShopsScreenState extends State<WorkShopsScreen> {
               itemCount: 10,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  width: Get.width,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(11),
-                      border: Border.all(color: Colors.white),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.black26,
-                          offset: Offset(
-                            0.2,
-                            0.2,
+                return GestureDetector(
+                  onTap: (){
+                    Get.to(const WorkShopDetailsScreen());
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    width: Get.width,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(11),
+                        border: Border.all(color: Colors.white),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black26,
+                            offset: Offset(
+                              0.2,
+                              0.2,
+                            ),
+                            blurRadius: 1,
                           ),
-                          blurRadius: 1,
+                        ]
+                    ),
+                    child: Row(
+                      children: [
+                        const SizedBox(width: 10),
+                        // Left Column with Image and Icons
+                        SizedBox(
+                          width: width * 0.3,
+                          height: height * 0.12,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(6),
+                            child: CachedNetworkImage(
+                              imageUrl:
+                              "https://media.istockphoto.com/id/515067687/photo/fagaras-mountains-romania-transylvania-region.jpg?s=2048x2048&w=is&k=20&c=8wJ56nL1trH7XM4_C86IWDsoQrzuj9ZyjP6Oe7SA6GA=",
+                              fit: BoxFit.cover,
+                              errorWidget: (_, __, ___) => const Icon(
+                                Icons.category,
+                                color: Color(0xff22C55E),
+                              ),
+                              placeholder: (_, __) => const SizedBox(),
+                            ),
+                          ),
                         ),
-                      ]),
-                  child: Row(
-                    children: [
-                      const SizedBox(width: 10),
-                      // Left Column with Image and Icons
-                      Column(
-                        children: [
-                          Padding(
-                              padding: const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 10),
-                              child: Image.asset(
-                                'assets/images/doctor.png',
-                                height: 100,
-                                width: 100,
-                              )),
-                          const SizedBox(height: 10),
-                        ],
-                      ),
-                      const SizedBox(width: 10),
-                      // Right Column with Details
-                      const Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'ADHD | Austhama | Mental Health',
-                              style: TextStyle(fontSize: 10, color: AppTheme.greenColor),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              'Functional medician Approach For Development Disorder',
-                              style: TextStyle(fontSize: 12, color: Colors.black),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              'Dr. Aswini Gard',
-                              style: TextStyle(fontSize: 10, color: Colors.black),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              'Functional Madetician Expert, MBBS',
-                              style: TextStyle(fontSize: 10, color: Colors.grey),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.calendar_month,
-                                  color: AppTheme.greenColor,
-                                  size: 12,
-                                ),
-                                Flexible(
-                                  child: Text(
-                                    'Feb,28,2024 | 07:30 PM - 09:30 PM (IST)',
-                                    style: TextStyle(fontSize: 8, color: AppTheme.greenColor),
+                        SizedBox(width: 10,),
+                        const Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 10),
+                              Text(
+                                'ADHD | Austhama | Mental Health',
+                                style: TextStyle(fontSize: 10, color: AppTheme.greenColor),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                'Functional medician Approach For Development Disorder',
+                                style: TextStyle(fontSize: 12, color: Colors.black),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                'Dr. Aswini Gard',
+                                style: TextStyle(fontSize: 10, color: Colors.black),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                'Functional Madetician Expert, MBBS',
+                                style: TextStyle(fontSize: 10, color: Colors.grey),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.calendar_month,
+                                    color: AppTheme.greenColor,
+                                    size: 12,
                                   ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                          ],
+                                  Flexible(
+                                    child: Text(
+                                      'Feb,28,2024 | 07:30 PM - 09:30 PM (IST)',
+                                      style: TextStyle(fontSize: 8, color: AppTheme.greenColor),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+
+                            ],
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                    ],
+                        const SizedBox(width: 10),
+                      ],
+                    ),
                   ),
                 );
               })

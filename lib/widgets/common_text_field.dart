@@ -117,8 +117,9 @@ class RegisterTextFieldWidget extends StatelessWidget {
 class CommonButtonBlue extends StatelessWidget {
   final String title;
   final VoidCallback? onPressed;
+  final EdgeInsetsGeometry? margin;
 
-  const CommonButtonBlue({Key? key, required this.title, this.onPressed}) : super(key: key);
+  const CommonButtonBlue({Key? key, required this.title, this.onPressed, this.margin}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -126,6 +127,7 @@ class CommonButtonBlue extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         height: 40,
+        margin: margin,
         width: MediaQuery.sizeOf(context).width,
         decoration: BoxDecoration(
             gradient: const LinearGradient(
